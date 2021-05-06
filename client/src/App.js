@@ -5,7 +5,8 @@ import Header from './components/Header';
 import {Container} from 'react-bootstrap';
 import Home from './views/Home';
 import { BrowserRouter, Route } from 'react-router-dom';
-import ProductDetail from './views/ProductCard';
+import ProductDetails from './views/ProductDetails';
+import UpdateProduct from './views/UpdateProduct';
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <main className='py-3'>
           <Container>
             <Route path='/' component={Home} exact/>
-            <Route path='/product/:id' component={ProductDetail}/>
+            <Route path='/product/:id' component={ProductDetails}/>
+            <Route path='/update/:id' component={UpdateProduct}/>
           </Container>
         </main>
       <Footer/>

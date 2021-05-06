@@ -3,7 +3,7 @@ const { ACCEPTED, SERVICE_UNAVAILABLE } = require('../../../common/constants');
 const Products = require('../../../data/products.json');
 const LOG = require('../../../logger/log');
 
-const DEFAULT_PRODUCT_ON_SINGLE_PAGE = 10;
+const DEFAULT_PRODUCT_ON_SINGLE_PAGE = 12;
 
 const getAllProducts = (req, res) => {
     try{
@@ -15,11 +15,11 @@ const getAllProducts = (req, res) => {
         if(sortBy === 'dateModified'){
 
         }else{
-        res.status(ACCEPTED).send(buildSuccess(Products.slice(skipProducts, endIndex)));
+        res.status(ACCEPTED).json(buildSuccess(Products.slice(skipProducts, endIndex)));
         }
     }catch(error){
         LOG.error(error);
-        res.status(SERVICE_UNAVAILABLE).send(buildError(error));
+        res.status(SERVICE_UNAVAILABLE).json(buildError(error));
     }
 }
 

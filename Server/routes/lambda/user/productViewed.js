@@ -1,16 +1,20 @@
-const { ACCEPTED } = require('../../../common/constants');
+const { ACCEPTED, NOT_MODIFIED, CREATED } = require('../../../common/constants');
 const Viewed = require('../../../data/viewed.json');
 const writeProductFile = require('../common/writeDbFile');
+const path = require('path');
+const { buildSuccess } = require('../../../common/build');
+
 const FILE_PATH = path.join(__dirname, '../../../data/viewed.json');
 
 const productViewed = (req, res) => {
-    const { productId: id, userId } = req.query; 
+    let { productId: id, userId } = req.params; 
+    id = parseInt(id);
     let newView = {};
     let viewUpdated = false;
     if(Viewed.length == 0){
         newView = {
             userId,
-            viewedProducts: [productId]
+            viewedProducts: [id]
         }
         Viewed.push(newView);
         viewUpdated = true;
@@ -20,8 +24,9 @@ const productViewed = (req, res) => {
         if(userViewIndex<0){
             newView = {
                 userId,
-                viewedProducts: [productId]
+                viewedProducts: [id]
             };
+            Viewed.push(newView);
             viewUpdated = true;
         }else{
             const userView = Viewed[userViewIndex];
@@ -38,8 +43,9 @@ const productViewed = (req, res) => {
         }).catch(err => {
             return res.status(NOT_MODIFIED).send(buildSuccess(`Views could not be updated for user ${userId}: ${err}`));
         })
+    }else{
+        return res.status(ACCEPTED).send(buildSuccess(`Views successfully updated for user: ${userId}`));
     }
-    return res.status(ACCEPTED).send(buildSuccess(`Views successfully updated for user: ${userId}`));
 
 }
 
