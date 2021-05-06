@@ -13,6 +13,7 @@ const editProduct = (req, res) => {
         productImage: image, productStock: stock,
         productPrice: price, salePrice: sPrice 
     } = req.body;
+    console.log(req.body);
     const indexOfProduct = Products.findIndex(product => product.productId === id);
     if(indexOfProduct<0){
         return res.status(BAD_REQUEST).send(buildError(id ? `Incorrect product id: ${id}` : `No product id found`));

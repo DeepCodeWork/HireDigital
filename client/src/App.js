@@ -16,7 +16,7 @@ function App() {
           <Container>
             <Route path='/' component={Home} exact/>
             <Route path='/product/:id' component={ProductDetails}/>
-            <Route path='/update/:id' component={UpdateProduct}/>
+            <Route path='/update/:verb/:id' component={UpdateProduct}/>
           </Container>
         </main>
       <Footer/>

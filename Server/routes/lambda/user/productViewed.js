@@ -6,6 +6,10 @@ const { buildSuccess } = require('../../../common/build');
 
 const FILE_PATH = path.join(__dirname, '../../../data/viewed.json');
 
+// Saving the productId whenever a user will view a product
+// Then we can easily find out the frequency of products viewed by the follower
+// Then we can give the suggestions
+
 const productViewed = (req, res) => {
     let { productId: id, userId } = req.params; 
     id = parseInt(id);
